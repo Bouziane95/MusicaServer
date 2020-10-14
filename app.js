@@ -11,6 +11,10 @@ const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 
+var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/Users");
+var bandsRouter = require("./routes/Bands");
+
 /**
  * Middlewares
  */
@@ -43,6 +47,9 @@ app.use(function (req, res, next) {
 const authRouter = require("./routes/auth");
 
 app.use("/api/auth", authRouter);
+app.use("/", indexRouter);
+app.use("/users", usersRouter);
+app.use("/bands", bandsRouter);
 
 // 404 Middleware
 app.use((req, res, next) => {
