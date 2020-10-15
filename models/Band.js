@@ -6,7 +6,6 @@ const bandSchema = new Schema({
   bandBoss_id: { type: Schema.Types.ObjectId, ref: "User" },
   bandName: String,
   musicStyle: [String],
-  groupMembers: [String],
   lookingFor: [String],
   description: String,
   location: [Number],

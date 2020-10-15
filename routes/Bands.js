@@ -5,7 +5,7 @@ const uploader = require("../config/cloudinary");
 
 /* GET bands listing. */
 router.get("/", function (req, res, next) {
-    Bands.find()
+    Bands.find().populate("bandBoss_id", "-password")
       .then((dbResponse) => {
         res.status(200).json(dbResponse);
       })
@@ -30,6 +30,8 @@ router.get("/", function (req, res, next) {
     if (req.file) {
         newBand.image = req.file.path;
     }
+    newBand.bandBoss_id = req.session.currentUser;
+
   
     Bands.create(newBand)
       .then((carsDocument) => {
