@@ -28,10 +28,10 @@ router.get("/", function (req, res, next) {
     const newBand = req.body;
   
     if (req.file) {
-        newBand.image = req.file.path;
+        newBand.bandPicture = req.file.path;
     }
     newBand.bandBoss_id = req.session.currentUser;
-
+    console.log(newBand)
   
     Bands.create(newBand)
       .then((carsDocument) => {
@@ -39,6 +39,7 @@ router.get("/", function (req, res, next) {
       })
       .catch((error) => {
         res.status(500).json(error);
+        
       });
   });
 

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   firstName: {type: String, required: true},
   lastName: {type: String, required: true},
-  ageName: Number,
+  age: Number,
   profilePicture: String,
   description: String,
   email: { type: String, required: true },
@@ -16,6 +16,7 @@ const userSchema = new Schema({
   favouriteBand: String,
   link: String,
   myBands: [String],
+  bandsCreated: [{type: Schema.Types.ObjectId, ref: "Band"}],
 });
 
 const User = mongoose.model("User", userSchema);

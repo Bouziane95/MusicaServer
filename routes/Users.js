@@ -63,4 +63,18 @@ router.delete("/:id", (req, res, next) => {
     });
 });
 
+///// ROUTES FOR THE USERS BANDS
+
+router.get("/:id/bands", (req, res, next) => {
+  const currentUserId = req.session.currentUser; // We retrieve the users id from the session.
+
+  // And then get all the items matching the id_user field that matches the logged in users id.
+  Users.findById(currentUserId).populate("bandsCreated")
+    .then((bandDocuments) => {
+      res.status(200).json(bandDocuments);
+      console.log(bandDocuments)
+    })
+    .catch(next)
+});
+
 module.exports = router;
