@@ -2,6 +2,7 @@ var express = require("express");
 const Users = require("../models/User");
 var router = express.Router();
 const uploader = require("../config/cloudinary");
+const { update } = require("../models/User");
 
 /*Get users listing */
 
@@ -41,11 +42,15 @@ router.post("/", uploader.single("profilePicture"), (req, res, next) => {
     });
 });
 
-router.patch("/:id", (req, res, next) => {
+router.patch("/:id", uploader.single("profilePicture"), (req, res, next) => {
   const updateValues = req.body;
 
+  if (req.file) {
+    updateValues.profilePicture = req.file.path;
+  }
   Users.findByIdAndUpdate(req.params.id, updateValues, { new: true })
     .then((usersDocument) => {
+     
       res.status(200).json(usersDocument);
     })
     .catch((error) => {

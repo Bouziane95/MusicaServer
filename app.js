@@ -35,12 +35,12 @@ app.use(
 );
 
 
-app.use(async function(req,res,next) {
-  const User = require("./models/User")
-  const user =  await User.findOne();
-  req.session.currentUser = user._id;
-  next();
-})
+// app.use(async function(req,res,next) {
+//   const User = require("./models/User")
+//   const user =  await User.findOne();
+//   req.session.currentUser = user._id;
+//   next();
+// })
 
 // Test to see if user is logged In before getting into any router.
 app.use(function (req, res, next) {
