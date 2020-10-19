@@ -16,18 +16,10 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
-  Users.findById(req.params.id)
-    .then((dbRes) => {
-      res.status(200).json(dbRes);
-    })
-    .catch((error) => {
-      res.status(500).json(error);
-    });
-});
-
 router.post("/", uploader.single("profilePicture"), (req, res, next) => {
+
   const newUser = req.body;
+  console.log("req body dans post :",req.body);
 
   if (req.file) {
     newUser.profilePicture = req.file.path;
@@ -62,6 +54,16 @@ router.delete("/:id", (req, res, next) => {
   Users.findByIdAndRemove(req.params.id)
     .then(() => {
       res.sendStatus(204);
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+    });
+});
+
+router.get("/:id", (req, res) => {
+  Users.findById(req.params.id)
+    .then((dbRes) => {
+      res.status(200).json(dbRes);
     })
     .catch((error) => {
       res.status(500).json(error);
