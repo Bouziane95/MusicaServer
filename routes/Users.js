@@ -3,7 +3,7 @@ const Users = require("../models/User");
 var router = express.Router();
 const uploader = require("../config/cloudinary");
 const { update } = require("../models/User");
-
+const Bands = require("../models/Band");
 /*Get users listing */
 
 router.get("/", (req, res) => {
@@ -70,16 +70,16 @@ router.delete("/:id", (req, res, next) => {
 
 ///// ROUTES FOR THE USERS BANDS
 
-router.get("/:id/bands", (req, res, next) => {
+router.get("/me/bands", (req, res, next) => {
   const currentUserId = req.session.currentUser; // We retrieve the users id from the session.
+  console.log(currentUserId);
 
   // And then get all the items matching the id_user field that matches the logged in users id.
-  Users.findById(currentUserId).populate("bandsCreated")
-    .then((bandDocuments) => {
-      res.status(200).json(bandDocuments);
-      console.log(bandDocuments)
+  Bands.find({ bandBoss_id: currentUserId })
+    .then((bandDetails) => {
+      res.status(200).json(bandDetails);
     })
-    .catch(next)
+    .catch(next);
 });
 
 module.exports = router;

@@ -39,6 +39,11 @@ app.use(
 //   const User = require("./models/User")
 //   const user =  await User.findOne();
 //   req.session.currentUser = user._id;
+// app.use(async function(req,res,next) {
+//   const User = require("./models/User")
+//   const user =  await User.findOne();
+//   // console.log(user)
+//   // req.session.currentUser = user._id;
 //   next();
 // })
 
