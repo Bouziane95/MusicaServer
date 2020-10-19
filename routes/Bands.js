@@ -54,9 +54,11 @@ router.post("/", uploader.single("bandPicture"), (req, res, next) => {
     });
 });
 
-router.patch("/:id", (req, res, next) => {
+router.patch("/:id", uploader.single("bandPicture"), (req, res, next) => {
   const updateValues = req.body;
-
+  if (req.file) {
+    updateValues.bandPicture = req.file.path;
+  }
   Bands.findByIdAndUpdate(req.params.id, updateValues, { new: true })
     .then((bandsDocument) => {
       res.status(200).json(bandsDocument);
