@@ -14,11 +14,14 @@ router.post("/signin", (req, res, next) => {
         return res.status(400).json({ message: "Invalid credentials" });
       }
 
-      const isValidPassword = bcrypt.compareSync(password, userDocument.password);
+      const isValidPassword = bcrypt.compareSync(
+        password,
+        userDocument.password
+      );
       if (!isValidPassword) {
         return res.status(400).json({ message: "Invalid credentials" });
       }
-      
+
       req.session.currentUser = userDocument._id;
       res.redirect("/api/auth/isLoggedIn");
     })
@@ -26,8 +29,18 @@ router.post("/signin", (req, res, next) => {
 });
 
 router.post("/signup", uploader.single("profilePicture"), (req, res, next) => {
-  const { email, instrumentsPlayed, firstName, lastName, description, lookingFor, password } = req.body;
-  
+  const {
+    email,
+    instrumentsPlayed,
+    age,
+    firstName,
+    lastName,
+    description,
+    lookingFor,
+    location,
+    locationAddress,
+    password,
+  } = req.body;
 
   User.findOne({ email })
     .then((userDocument) => {
@@ -36,12 +49,23 @@ router.post("/signup", uploader.single("profilePicture"), (req, res, next) => {
       }
 
       const hashedPassword = bcrypt.hashSync(password, salt);
-      const newUser = { email, lastName, firstName, description,  lookingFor, instrumentsPlayed, password  : hashedPassword };
+      const newUser = {
+        email,
+        lastName,
+        age,
+        firstName,
+        description,
+        lookingFor,
+        instrumentsPlayed,
+        location,
+        locationAddress,
+        password: hashedPassword,
+      };
 
       if (req.file) {
         newUser.profilePicture = req.file.path;
       }
-      
+
       User.create(newUser)
         .then((newUserDocument) => {
           /* Login on signup */
