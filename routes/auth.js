@@ -38,7 +38,6 @@ router.post("/signup", uploader.single("profilePicture"), (req, res, next) => {
     description,
     lookingFor,
     location,
-    locationAddress,
     password,
   } = req.body;
 
@@ -58,7 +57,6 @@ router.post("/signup", uploader.single("profilePicture"), (req, res, next) => {
         lookingFor,
         instrumentsPlayed,
         location,
-        locationAddress,
         password: hashedPassword,
       };
 

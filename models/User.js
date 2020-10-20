@@ -10,7 +10,6 @@ const userSchema = new Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   location: [Number],
-  locationAddress: String,
   lookingFor: [String],
   instrumentsPlayed: [String],
   typesOfMusicPlay: String,
