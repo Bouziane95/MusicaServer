@@ -19,8 +19,7 @@ router.get("/", (req, res) => {
 router.post("/", uploader.single("profilePicture"), (req, res, next) => {
 
   const newUser = req.body;
-  console.log("req body dans post :",req.body);
-
+  
   if (req.file) {
     newUser.profilePicture = req.file.path;
   }

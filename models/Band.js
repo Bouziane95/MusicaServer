@@ -8,7 +8,7 @@ const bandSchema = new Schema({
   musicStyle: [String],
   lookingFor: [String],
   description: String,
-  location: [Number],
+  bandLocation: String,
   email: String,
   link: String,
 });

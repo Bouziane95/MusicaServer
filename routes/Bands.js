@@ -3,6 +3,7 @@ const Bands = require("../models/Band");
 const Users = require("../models/User");
 var router = express.Router();
 const uploader = require("../config/cloudinary");
+const { response } = require("express");
 // const { default: UserBands } = require("../../../client/src/pages/UserBands");
 
 /* GET bands listing. */
@@ -29,7 +30,7 @@ router.get("/:id", function (req, res, next) {
 
 router.post("/", uploader.single("bandPicture"), (req, res, next) => {
   const newBand = req.body;
-
+console.log(newBand)
   if (req.file) {
     newBand.bandPicture = req.file.path;
   }
@@ -69,8 +70,10 @@ router.patch("/:id", uploader.single("bandPicture"), (req, res, next) => {
 });
 
 router.delete("/:id", (req, res, next) => {
+  console.log(req.params.id)
   Bands.findByIdAndRemove(req.params.id)
-    .then(() => {
+    .then((response) => {
+      console.log("deleted", response)
       res.sendStatus(204);
     })
     .catch((error) => {
