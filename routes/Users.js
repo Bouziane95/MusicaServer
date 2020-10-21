@@ -51,7 +51,10 @@ router.patch("/:id", uploader.single("profilePicture"), (req, res, next) => {
 
 router.delete("/:id", (req, res, next) => {
   Users.findByIdAndRemove(req.params.id)
-    .then(() => {
+    .then((data) => {
+      Bands.deleteMany({bandBoss_id: req.params.id}).then().catch((err) =>{
+        console.log(err)
+      })
       res.sendStatus(204);
     })
     .catch((error) => {
