@@ -60,9 +60,16 @@ app.use(function (req, res, next) {
 const authRouter = require("./routes/auth");
 
 app.use("/api/auth", authRouter);
-app.use("/", indexRouter);
+// app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/bands", bandsRouter);
+
+if (process.env.NODE_ENV === "production") {
+  app.use("*", (req, res, next) => {
+    // If no routes match, send them the React HTML.
+    res.sendFile(__dirname + "/public/index.html");
+  });
+}
 
 // 404 Middleware
 app.use((req, res, next) => {
