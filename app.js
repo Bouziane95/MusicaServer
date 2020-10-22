@@ -61,8 +61,8 @@ const authRouter = require("./routes/auth");
 
 app.use("/api/auth", authRouter);
 // app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/bands", bandsRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/bands", bandsRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use("*", (req, res, next) => {

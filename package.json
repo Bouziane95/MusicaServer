@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "nodemon ./bin/www",
     "start": "node ./bin/www",
-    "build-react": "echo ---- creating react build --- && cd ../Musica-clientside  && npm install && npm run build && cp -r ./build/* ../server/public/ && cd .."
+    "build-react": "echo ---- creating react build --- && cd ../client  && npm install && npm run build && cp -r ./build/* ../server/public/ && cd .."
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
