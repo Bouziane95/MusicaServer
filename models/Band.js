@@ -2,14 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const bandSchema = new Schema({
-  bandPicture: String,
+  bandPicture: { type: String, require: true },
   bandBoss_id: { type: Schema.Types.ObjectId, ref: "User" },
-  bandName: String,
-  musicStyle: [String],
-  lookingFor: [String],
-  description: String,
-  bandLocation: String,
-  email: String,
+  bandName: { type: String, require: true },
+  musicStyle: { type: [String], require: true },
+  lookingFor: { type: [String], require: true },
+  description: { type: String, require: true },
+  bandLocation: { type: String, require: true },
+  email: { type: String, require: true },
   link: String,
 });
 

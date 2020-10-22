@@ -16,7 +16,6 @@ const userSchema = new Schema({
   locationAddress: { type: String, required: true },
   favouriteBand: { type: String, required: true },
   link: String,
-  myBands: { type: [String], required: true },
   bandsCreated: [{ type: Schema.Types.ObjectId, ref: "Band" }],
 });
 
